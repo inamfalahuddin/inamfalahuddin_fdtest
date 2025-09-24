@@ -1,0 +1,23 @@
+node_modules
+dist
+
+# .env
+
+.DS_Store
+npm-debug.log
+yarn-error.log
+
+.vscode
+.idea
+*.sublime-project
+
+
+# Logs
+logs
+*.log
+pids
+*.pid
+*.seed
+*.pid.lock
+lib-coverage
+coverage
