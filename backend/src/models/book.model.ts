@@ -1,12 +1,12 @@
-import { sql } from "drizzle-orm";
+import { pgTable, serial, varchar, text, integer, timestamp } from "drizzle-orm/pg-core";
 
-export const books = {
-    id: sql`serial primary key`,
-    title: sql`varchar(255)`,
-    author: sql`varchar(255)`,
-    description: sql`text`,
-    thumbnail_url: sql`varchar(255)`,
-    rating: sql`int`,
-    created_at: sql`timestamp default now()`,
-    updated_at: sql`timestamp default now()`
-};
+export const books = pgTable("books", {
+    id: serial("id").primaryKey(),
+    title: varchar("title", { length: 255 }).notNull(),
+    author: varchar("author", { length: 255 }).notNull(),
+    description: text("description"),
+    thumbnail_url: varchar("thumbnail_url", { length: 255 }),
+    rating: integer("rating"),
+    created_at: timestamp("created_at").defaultNow(),
+    updated_at: timestamp("updated_at").defaultNow(),
+});

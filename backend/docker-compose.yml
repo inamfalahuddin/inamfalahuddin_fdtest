@@ -10,6 +10,7 @@ services:
     env_file:
       - .env
     volumes:
+      - ./uploads:/backend/uploads
       - ./src:/backend/src         
       - ./package.json:/backend/package.json
       - ./tsconfig.json:/backend/tsconfig.json

@@ -9,6 +9,42 @@ import {
 } from "../services/auth.service.js";
 import { ApiResponse } from "../utils/response.utils.js";
 
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Authentication endpoints
+ */
+
+
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: Bad request
+ */
 export const registerController = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
@@ -25,6 +61,35 @@ export const registerController = async (req: Request, res: Response) => {
     }
 };
 
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Login user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *       400:
+ *         description: Bad request
+ */
 export const loginController = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
@@ -36,6 +101,26 @@ export const loginController = async (req: Request, res: Response) => {
     }
 };
 
+
+/**
+ * @swagger
+ * /auth/verify-email:
+ *   get:
+ *     summary: Verify user email
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: query
+ *         name: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Verification token sent via email
+ *     responses:
+ *       200:
+ *         description: Email verified successfully
+ *       400:
+ *         description: Token required or invalid
+ */
 export const verifyEmailController = async (req: Request, res: Response) => {
     try {
         const { token } = req.query;
@@ -49,6 +134,31 @@ export const verifyEmailController = async (req: Request, res: Response) => {
     }
 };
 
+
+/**
+ * @swagger
+ * /auth/forgot-password:
+ *   post:
+ *     summary: Request password reset
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *     responses:
+ *       200:
+ *         description: Password reset email sent
+ *       400:
+ *         description: Email required
+ */
 export const forgotPasswordController = async (req: Request, res: Response) => {
     try {
         const { email } = req.body;
@@ -62,6 +172,34 @@ export const forgotPasswordController = async (req: Request, res: Response) => {
     }
 };
 
+
+/**
+ * @swagger
+ * /auth/reset-password:
+ *   post:
+ *     summary: Reset user password
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - token
+ *               - newPassword
+ *             properties:
+ *               token:
+ *                 type: string
+ *               newPassword:
+ *                 type: string
+ *                 format: password
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ *       400:
+ *         description: Token and new password required
+ */
 export const resetPasswordController = async (req: Request, res: Response) => {
     try {
         const { token, newPassword } = req.body;

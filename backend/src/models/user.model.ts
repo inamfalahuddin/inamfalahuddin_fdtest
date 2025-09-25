@@ -2,7 +2,7 @@ import { pgTable, serial, text, varchar, boolean, timestamp } from "drizzle-orm/
 
 export const users = pgTable("users", {
     id: serial("id").primaryKey(),
-    name: varchar("name", { length: 255 }).notNull(),
+    name: varchar("name", { length: 255 }),
     email: varchar("email", { length: 255 }).notNull(),
     password: varchar("password", { length: 255 }).notNull(),
     is_verified: boolean("is_verified").default(false),
